@@ -1,5 +1,7 @@
 {
   "name": "chitchat",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }
