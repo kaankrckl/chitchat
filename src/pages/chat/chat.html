@@ -6,16 +6,23 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>chat</ion-title>
+    <ion-title>Username</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
   <div id="message-list">
-    <div class="message" *ngFor="let item of items | async">
-      <div class="username">{{ item.username }}</div>
-      <div class="message-text">{{ item.message }}</div>
+    <div class="message" *ngFor="let item of items | async" >
+      <div class="inner" [class]="item.username == username ? 
+      'messageRight' : 'messageLeft'">
+        <img  class="pic" src="https://wallpaperaccess.com/full/354039.jpg">
+      </div>
+      <div class="innerMessage" [class]="item.username == username ? 
+      'innerMessage messageRight' : 'innerMessage messageLeft'">
+        <div class="username">{{ item.username }}</div>
+        <div class="message-text">{{ item.message }}</div>
+      </div>
     </div>
 
 <!--    <ion-item class="text" *ngFor="let item of items | async">
@@ -27,7 +34,15 @@
 
 <ion-footer>
   <ion-toolbar>
-    <ion-input type="text" [(ngModel)]="message"></ion-input>
-    <button ion-button block (click)="sendMessage()">Send</button>
+    <div id="footer">
+      <div class="elem">
+        <ion-input type="text" [(ngModel)]="message"></ion-input>
+      </div>
+      <div class="elem">
+        <button ion-button (click)="sendMessage()">
+          <ion-icon name="send" id="stat"></ion-icon>
+        </button>
+      </div>
+    </div>
   </ion-toolbar>
 </ion-footer>

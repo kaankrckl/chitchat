@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
-//import { Storage } from '@ionic/storage';
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the LoginPage page.
  *
@@ -17,7 +17,7 @@ import { TabsPage } from '../tabs/tabs';
 export class LoginPage {
   username: string =''; 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, public storage: Storage,) {
   }
 
   ionViewDidLoad() {
@@ -37,7 +37,7 @@ export class LoginPage {
     if(/^[a-zA-Z0-9]+$/.test(this.username)){
       //username is valid
       this.navCtrl.setRoot(TabsPage, {username: this.username});
-     // window.localStorage.setItem('username', this.username);
+      window.localStorage.setItem('username', this.username);
     }
     else{
       this.presentAlert('Error', 'Invalid username');

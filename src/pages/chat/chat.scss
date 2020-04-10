@@ -1,9 +1,10 @@
 page-chat {
 
-    .message{
+    .innerMessage{
+        display: inline-block;
         background-color: gray;
-        margin: 5px 5px;
-        padding: 5px;
+        margin: 5px ;
+        padding: 5px 10px;
         border-radius: 10px;
     }
     .username{
@@ -14,5 +15,35 @@ page-chat {
     .message-text{
         color: white;
         font-size: 110%;
+    }
+    #footer{
+        display: flex;
+        flex-direction: row;
+    }
+    div.elem:first-child{
+        flex-grow: 1;
+    }
+    .elem button{
+        border-radius: 0;
+        margin: 0;
+    }
+    .messageLeft{
+        float: left;
+    }
+    .messageRight{
+        float: right;
+    }
+    .message:after{
+        display: block;
+        clear: both;
+        content: '';
+    }
+    .inner{
+        display: inline-block;
+    }
+    .pic{
+        border-radius: 10px;
+        height: 50px;
+        width: 50px;
     }
 }

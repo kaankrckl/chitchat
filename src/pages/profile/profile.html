@@ -7,11 +7,32 @@
 </ion-header>
 
 <ion-content>
+  <div class="main">
+    <div>
+
+        <img  class="pic" src="https://wallpaperaccess.com/full/354039.jpg">
+
+    </div>
+    <div  class="username">
+      kaan
+    </div>
+
+  </div>
   <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
     <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
+      <button ion-item  class="status" >
+         <p>Set Status</p>
+         <p id="stat">Idle</p>
+         <ion-icon name="moon-outline" id="stat"></ion-icon>
+      </button>
+
+      <button ion-item >
+        <p>Friends</p>
+     </button>
+
+     <button ion-item>
+      <p>Account</p>
+   </button>
     </ion-item>
   </ion-list>
 </ion-content>

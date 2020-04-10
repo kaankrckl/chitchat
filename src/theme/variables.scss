@@ -34,11 +34,17 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
+  primary:    #ffffff,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  dcblue:     #7289da,
+  dcwhite:    #ffffff,
+  dcgray:     #99aab5,
+  dcblack:    #2c2f33,
+  dcdark:    	#23272a
+
 );
 
 
@@ -46,15 +52,30 @@ $colors: (
 // --------------------------------------------------
 // iOS only Sass variables can go here
 
-
+//Searchbar
+$searchbar-ios-background-color: color($colors, dcdark);
+$searchbar-ios-input-background-color:color($colors, dcdark);
+$searchbar-ios-input-text-color:color($colors, dcwhite);
+$searchbar-ios-input-placeholder-color:color($colors, dcgray);
+$searchbar-ios-input-search-icon-color:color($colors, dcgray);
 
 
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
+//Toolbar
+$toolbar-md-background: color($colors, dcdark);
 
+//Tabs
+$tabs-md-background: color($colors, dcdark);
 
+//Searchbar
+$searchbar-md-background-color:color($colors, dcdark);
+$searchbar-md-input-background-color:color($colors, dcdark);
+$searchbar-md-input-text-color:color($colors, dcwhite);
+$searchbar-md-input-placeholder-color:color($colors, dcgray);
+$searchbar-md-input-search-icon-color:color($colors, dcgray);
 
 // App Windows Variables
 // --------------------------------------------------
@@ -70,7 +91,7 @@ $colors: (
 // so that the above variables are used and Ionic's
 // default are overridden.
 
-@import "ionic.theme.default";
+@import "ionic.theme.dark";
 
 
 // Ionicons

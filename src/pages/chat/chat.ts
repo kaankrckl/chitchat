@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Storage } from '@ionic/storage';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
@@ -26,11 +27,12 @@ export class ChatPage {
   countries: any[];
   labels:any;
 
-  constructor(public db: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams) {
-/*     if (window.localStorage.getItem("username") !== undefined || window.localStorage.getItem("username") !== null)
+  constructor(public db: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
+    if (window.localStorage.getItem("username") !== undefined || window.localStorage.getItem("username") !== null)
       {
         this.username = window.localStorage.getItem("username");
-      }  */
+      }  
+      console.log("USERNAME" + this.username);
     this.labels=this.db.list('/chat');
 
     this.items = db.list('chat').valueChanges();
@@ -43,9 +45,10 @@ export class ChatPage {
 
   sendMessage(){
     this.db.list('/chat').push({
-      username: "kaan",
+      username: this.username,
       message: this.message
     })
+    this.message='';
   }
 
 }

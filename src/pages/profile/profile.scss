@@ -1,3 +1,28 @@
 page-profile {
-
+    .status p{
+        display: flex;
+        justify-content: space-between;
+        display: inline-block;
+    }
+    p{
+        display: inline-block;
+    }
+    #stat{
+       float: right;
+       padding-right: 7px;
+    }
+    .main{
+        height: 150px;
+    }
+    .pic{
+        height:70px;
+        border-radius: 15px;
+        margin-top:10px;
+        margin-left: 10px;
+    }
+    .username{
+        margin-top:10px;
+        margin-left: 10px;
+        font-size: 120%;   
+    }
 }

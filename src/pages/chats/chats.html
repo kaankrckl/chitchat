@@ -6,10 +6,40 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>chats</ion-title>
+    <ion-title>Direct Messages</ion-title>
+    <ion-buttons end>
+      <button >
+      <ion-icon name="add-outline"></ion-icon>
+    </button>
+  </ion-buttons>
   </ion-navbar>
+
+  <ion-toolbar>
+    <ion-searchbar color="dark"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-list>
+    <ion-item (click)="openChat()">
+      <ion-avatar item-start>
+        <img src="https://wallpaperaccess.com/full/354039.jpg">
+      </ion-avatar>
+      <ion-label>
+        <h2>Finn</h2>
+        <p>Listen, I've had a pretty messed up day...</p>
+      </ion-label>
+    </ion-item>
 
+    <ion-item (click)="openChat()">
+      <ion-avatar item-start>
+        <img src="https://pbs.twimg.com/profile_images/1446356883/adventure-time-with-finn-and-jake-john-dimaggio-2_400x400.jpg">
+      </ion-avatar>
+      <ion-label>
+        <h2>Jake</h2>
+        <p>I've got enough on my plate as it is, and I...</p>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
 </ion-content>
