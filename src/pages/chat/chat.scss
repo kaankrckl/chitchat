@@ -46,4 +46,15 @@ page-chat {
         height: 50px;
         width: 50px;
     }
+
+    ion-input{
+        padding-left: 15px;
+        font-size: 125%;
+        border-color: pink;
+    }
+    .message.special .innerMessage{
+        width: 100%;
+        text-align: center;
+        float: none;
+    }
 }

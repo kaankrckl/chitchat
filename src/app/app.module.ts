@@ -14,9 +14,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 var firebaseConfig = {
-//Enter your firebase configurations
+  //Enter your firebase configurations
 };
 
 @NgModule({
@@ -33,6 +34,7 @@ var firebaseConfig = {
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],

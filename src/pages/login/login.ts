@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { Storage } from '@ionic/storage';
+import { AngularFireAuth } from '@angular/fire/auth';
+import firebase from 'firebase/app';
+import { User } from "../../models/user";
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -17,7 +21,9 @@ import { Storage } from '@ionic/storage';
 export class LoginPage {
   username: string =''; 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, public storage: Storage,) {
+  user = {} as User;
+
+  constructor(private afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, public storage: Storage,) {
   }
 
   ionViewDidLoad() {
@@ -33,16 +39,27 @@ export class LoginPage {
     alert.present();
   }
 
-  login(){
-    if(/^[a-zA-Z0-9]+$/.test(this.username)){
-      //username is valid
-      this.navCtrl.setRoot(TabsPage, {username: this.username});
-      window.localStorage.setItem('username', this.username);
-    }
-    else{
-      this.presentAlert('Error', 'Invalid username');
-    }
+  async login(user: User){
+    //   /^[a-zA-Z0-9]+$/.test(this.username)
+         
+      try{
+      const result = this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
+      if(result){
+        this.navCtrl.setRoot(TabsPage, {username: this.username});
+        window.localStorage.setItem('username', this.username);
+      }
+      console.log(result);
+      }
+      catch(e){
+        console.log(e);
+      }
     
+
+    
+  }
+
+  register(){
+    this.navCtrl.push('RegisterPage');
   }
 
 }

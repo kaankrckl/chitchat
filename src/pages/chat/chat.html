@@ -13,12 +13,23 @@
 <ion-content padding>
 
   <div id="message-list">
-    <div class="message" *ngFor="let item of items | async" >
+<!--     <div class="message" *ngFor="let item of items | async" >
       <div class="inner" [class]="item.username == username ? 
       'messageRight' : 'messageLeft'">
         <img  class="pic" src="https://wallpaperaccess.com/full/354039.jpg">
       </div>
-      <div class="innerMessage" [class]="item.username == username ? 
+      <div [class]="item.username == username ? 
+      'innerMessage messageRight' : 'innerMessage messageLeft'">
+        <div class="username">{{ item.username }}</div>
+        <div class="message-text">{{ item.message }}</div>
+      </div>
+    </div> -->
+    <div class="message" *ngFor="let item of melakes | async" >
+      <div class="inner" [class]="item.username == username ? 
+      'messageRight' : 'messageLeft'">
+        <img  class="pic" src="https://wallpaperaccess.com/full/354039.jpg">
+      </div>
+      <div [class]="item.username == username ? 
       'innerMessage messageRight' : 'innerMessage messageLeft'">
         <div class="username">{{ item.username }}</div>
         <div class="message-text">{{ item.message }}</div>
@@ -33,10 +44,9 @@
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
     <div id="footer">
       <div class="elem">
-        <ion-input type="text" [(ngModel)]="message"></ion-input>
+        <ion-input type="text" placeholder="Enter your message here ..." [(ngModel)]="message"></ion-input>
       </div>
       <div class="elem">
         <button ion-button (click)="sendMessage()">
@@ -44,5 +54,4 @@
         </button>
       </div>
     </div>
-  </ion-toolbar>
 </ion-footer>
