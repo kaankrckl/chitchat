@@ -3,9 +3,9 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { TabsPage } from '../tabs/tabs';
 import { Storage } from '@ionic/storage';
 import { AngularFireAuth } from '@angular/fire/auth';
-import firebase from 'firebase/app';
 import { User } from "../../models/user";
-
+import { Profile }  from '../../models/profile'
+import firebase from 'firebase/app';
 /**
  * Generated class for the LoginPage page.
  *
@@ -22,8 +22,8 @@ export class LoginPage {
   username: string =''; 
 
   user = {} as User;
-
-  constructor(private afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, public storage: Storage,) {
+  profile = {} as Profile;
+  constructor(private afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, public storage: Storage) {
   }
 
   ionViewDidLoad() {
@@ -41,19 +41,18 @@ export class LoginPage {
 
   async login(user: User){
     //   /^[a-zA-Z0-9]+$/.test(this.username)
-         
-      try{
-      const result = this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
-      if(result){
-        this.navCtrl.setRoot(TabsPage, {username: this.username});
-        window.localStorage.setItem('username', this.username);
-      }
-      console.log(result);
-      }
-      catch(e){
-        console.log(e);
-      }
-    
+    //
+     if(this.afAuth.auth.currentUser.emailVerified){
+      const result = this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password).then(auth=>{
+        window.localStorage.setItem('useremail', user.email);
+        window.localStorage.setItem('userpass', user.password);
+        window.localStorage.setItem('userid', firebase.auth().currentUser.uid);
+        this.navCtrl.setRoot(TabsPage);
+        console.log(result);
+      }).catch(error=>{
+        this.presentAlert(error, '');
+      })
+     }
 
     
   }

@@ -2,6 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { Camera } from '@ionic-native/camera';
 
 import { ChatsPage } from '../pages/chats/chats';
 import { ProfilePage } from '../pages/profile/profile';
@@ -15,9 +16,14 @@ import { IonicStorageModule } from '@ionic/storage';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { Firebase } from '@ionic-native/firebase/ngx';
+import { Push } from '@ionic-native/push';
+import { HttpModule  } from '@angular/http';
+import { FunctionsProvider } from '../providers/functions/functions';
 
 var firebaseConfig = {
   //Enter your firebase configurations
+
 };
 
 @NgModule({
@@ -35,6 +41,7 @@ var firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    HttpModule ,
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
@@ -47,9 +54,14 @@ var firebaseConfig = {
     LoginPage
   ],
   providers: [
+    Push,
     StatusBar,
+    Camera,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Firebase,
+    FunctionsProvider
+    
   ]
 })
 export class AppModule {}

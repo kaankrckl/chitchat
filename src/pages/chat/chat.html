@@ -6,39 +6,25 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>Username</ion-title>
+    <ion-title>{{friendName}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
   <div id="message-list">
-<!--     <div class="message" *ngFor="let item of items | async" >
+    <div class="message" *ngFor="let item of messages | async" >
       <div class="inner" [class]="item.username == username ? 
       'messageRight' : 'messageLeft'">
-        <img  class="pic" src="https://wallpaperaccess.com/full/354039.jpg">
+        <img  class="pic" src="{{item.userpic}}">
       </div>
       <div [class]="item.username == username ? 
       'innerMessage messageRight' : 'innerMessage messageLeft'">
         <div class="username">{{ item.username }}</div>
         <div class="message-text">{{ item.message }}</div>
-      </div>
-    </div> -->
-    <div class="message" *ngFor="let item of melakes | async" >
-      <div class="inner" [class]="item.username == username ? 
-      'messageRight' : 'messageLeft'">
-        <img  class="pic" src="https://wallpaperaccess.com/full/354039.jpg">
-      </div>
-      <div [class]="item.username == username ? 
-      'innerMessage messageRight' : 'innerMessage messageLeft'">
-        <div class="username">{{ item.username }}</div>
-        <div class="message-text">{{ item.message }}</div>
+        <div class="message-date">{{ item.createdAt }}</div>
       </div>
     </div>
-
-<!--    <ion-item class="text" *ngFor="let item of items | async">
-			{{item.username}}
-		</ion-item>  -->
   </div>
 
 </ion-content>

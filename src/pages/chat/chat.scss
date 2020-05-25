@@ -11,6 +11,7 @@ page-chat {
         color: red;
         font-weight: bold;
         font-size: 90%;
+        
     }
     .message-text{
         color: white;
@@ -29,9 +30,11 @@ page-chat {
     }
     .messageLeft{
         float: left;
+        max-width: 200px;
     }
     .messageRight{
         float: right;
+        max-width: 200px;
     }
     .message:after{
         display: block;
@@ -41,10 +44,13 @@ page-chat {
     .inner{
         display: inline-block;
     }
+    .message{
+    }
     .pic{
-        border-radius: 10px;
-        height: 50px;
-        width: 50px;
+        border-radius: 50px;
+        height: 48px;
+        width: 48px;
+        margin-top: 5px;
     }
 
     ion-input{
@@ -56,5 +62,19 @@ page-chat {
         width: 100%;
         text-align: center;
         float: none;
+    }
+    .elem{
+        color: white;
+    }
+    .message-date{
+        font-size: 70%;
+        float: right;
+    }
+    .message-text{
+        padding-right: 1px;
+        margin-right: 50;
+    }
+    .username{
+        
     }
 }

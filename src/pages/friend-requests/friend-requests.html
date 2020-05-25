@@ -1,0 +1,24 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>Friend Requests</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+
+    <ion-item  *ngFor="let item of items | async">
+      <ion-avatar item-start>
+        <img src="{{item.userpic}}">
+      </ion-avatar>
+      <ion-label class="status">
+        <h2>{{item.username}}</h2>
+          <ion-icon name="close-outline" class="stat" (click)="delete(item)"></ion-icon>
+          <ion-icon name="checkmark-outline" id="add" class="stat" (click)="addFriend(item)"></ion-icon>
+      </ion-label>
+
+    </ion-item>
+
+  </ion-list>
+</ion-content>

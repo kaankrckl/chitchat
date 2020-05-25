@@ -8,6 +8,9 @@ import 'rxjs/Rx';
 import { Content } from 'ionic-angular';
 import firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Http, Headers, RequestOptions } from '@angular/http';
+import { FunctionsProvider } from '../../providers/functions/functions';
+
 /**
  * Generated class for the ChatPage page.
  *
@@ -21,91 +24,81 @@ import { AngularFireAuth } from '@angular/fire/auth';
   templateUrl: 'chat.html',
 })
 export class ChatPage {
-  //deneme
+  isim:any;
   userid: any;
-  private dbRef= firebase.database().ref('messages');
-  private mesages=[];
-  melakes: Observable<any[]>;
-  //deneme
-
+  messages: Observable<any[]>;
+  userKey: any;
+  friendKey: any;
+  friendName:any;
+  friendId:any;
   username:any;
+  userpic:any;
   subscription: any;
-  messages: object[]=[];
   message: string='';
   items: Observable<any[]>;
-  allCountries: any;
-  countries: any[];
   labels:any;
   @ViewChild(Content) content: Content;
 
-  constructor(private afAuth: AngularFireAuth, public db: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
+  constructor(public functions: FunctionsProvider, public http: Http, private afAuth: AngularFireAuth, public db: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
     if (window.localStorage.getItem("username") !== undefined || window.localStorage.getItem("username") !== null)
       {
         this.username = window.localStorage.getItem("username");
+        this.userpic = window.localStorage.getItem("userpic");
       }  
-      console.log("USERNAME" + this.username);
-
+      this.userid=window.localStorage.getItem('userid');
 
     this.labels=this.db.list('/chat');
 
     this.items = db.list('chat').valueChanges();
-    console.log(this.items);
-
     this.afAuth.authState.subscribe(auth => {
-      this.userid=auth.uid;
+    //  this.userid=auth.uid;
     })
-    //deneme
-/*    
-    this.dbRef.child('OlEKKspVxVPuwvsJ1tZv2vDT4kE2').child('PaawgbUvOMZXnV4OsI6Z9GiIk3O2').on('child_added', snap =>{
-      let messsage=snap.val();
-      this.mesages.push(messsage);
-    }) */
-  
-  //deneme
-      //deneme2
-      this.melakes = db.list('messages/OlEKKspVxVPuwvsJ1tZv2vDT4kE2/PaawgbUvOMZXnV4OsI6Z9GiIk3O2').valueChanges();
-    
-    //deneme2
+    this.isim=`messages/${this.friendId}/${this.userid}`;
+    this.friendName=  this.navParams.get('username');
+    this.friendId=  this.navParams.get('userid');
+
+          this.messages = db.list(`messages/${this.friendId}/${this.userid}`).valueChanges();
+
+        var friendId=this.friendId
+        var curUserId= this.userid;
+
+        var query = this.db.database.ref("friends").orderByKey();
+        query.once("value")
+          .then(function(snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+            childSnapshot.forEach(function(ohSnap){
+             if(ohSnap.child("userid").val()==friendId){
+              window.localStorage.setItem("friendKey", ohSnap.key);
+             }
+             if(ohSnap.child("userid").val()==curUserId){
+              window.localStorage.setItem("userKey", ohSnap.key);
+             }
+            })
+
+          });
+        });
+
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChatPage');
+
   }
+ionViewDidEnter(){
+  this.friendKey=window.localStorage.getItem("friendKey");
+  this.userKey=window.localStorage.getItem("userKey");
+    this.content.scrollToBottom();
 
-  sendMessage(){
-
-    //denene
-    this.dbRef.child(this.userid).child('PaawgbUvOMZXnV4OsI6Z9GiIk3O2').push({
-    username: this.username,
-    message: this.message,
-    from: 'PaawgbUvOMZXnV4OsI6Z9GiIk3O2',
-    createdAt: new Date().getTime()}).key;
-
-    this.dbRef.child('PaawgbUvOMZXnV4OsI6Z9GiIk3O2').child(this.userid).push({
-      username: this.username,
-      message: this.message,
-      from: 'PaawgbUvOMZXnV4OsI6Z9GiIk3O2',
-      createdAt: new Date().getTime()}).key;
-    //deneme
-
-    this.db.list('/friends').push({
-      username: "canerkrckl",
-      userid: "PaawgbUvOMZXnV4OsI6Z9GiIk3O2",
-    })
-
-/* 
-    this.db.list('/chat').push({
-      username: this.username,
-      message: this.message,
-      createdAt: new Date().getTime()
-    }) */
+}
+   sendMessage(){
+    this.functions.sendMessage(this.friendId, this.friendKey, this.message, this.userKey);
     this.message='';
-    //to add a little delay before scroll
+     //to add a little delay before scroll
     setTimeout(()=>{
       this.content.scrollToBottom(200);
     })
-
-  }
-  
+    this.functions.pushNotification(this.username, this.message, this.friendName)
+  } 
 
 }

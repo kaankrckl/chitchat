@@ -8,31 +8,47 @@
 
 <ion-content>
   <div class="main">
-    <div>
-
-        <img  class="pic" src="https://wallpaperaccess.com/full/354039.jpg">
-
+    <div class="photo">
+        <img  class="pic" src="{{userpic}}">
+    </div>
+    <div class="edit">
+      <button ion-button small icon-left color="light" (click)="editPhoto()" >
+        <ion-icon name="camera"></ion-icon>
+        Edit
+      </button>
     </div>
     <div  class="username">
-      kaan
+      {{username}}
     </div>
-
   </div>
   <ion-list>
     <ion-item>
-      <button ion-item  class="status" >
+<!--       <button ion-item  class="status" >
          <p>Set Status</p>
          <p id="stat">Idle</p>
-         <ion-icon name="moon-outline" id="stat"></ion-icon>
-      </button>
+         <ion-icon name="moon" id="stat"></ion-icon>
+      </button> -->
 
-      <button ion-item >
-        <p>Friends</p>
+      <button ion-item (click)="requests()">
+        <p>Friend Requests</p>
      </button>
 
-     <button ion-item>
-      <p>Account</p>
+     <button ion-item (click)="invites()">
+      <p>Invitations Sent</p>
+     </button>
+
+   <button ion-item (click)="resetPassword()">
+    <p>Change Password</p>
    </button>
+
+   <button ion-item (click)="logout()">
+    <p>Log out</p>
+   </button>
+
+   <button ion-item (click)="deleteAccount()">
+    <p  id="delete">Delete Account</p>
+   </button>
+
     </ion-item>
   </ion-list>
 </ion-content>
